@@ -75,13 +75,11 @@ k8s_resource('mssql',
 
 k8s_resource('opensearch',
     labels=['infrastructure'],
-    resource_deps=['namespace'],
-    links=[link('http://opensearch.localhost:9080', 'OpenSearch')])
+    resource_deps=['namespace'])
 
 k8s_resource('wiremock',
     labels=['infrastructure'],
-    resource_deps=['wiremock-mappings-configmap', 'wiremock-files-configmap'],
-    links=[link('http://mock.localhost:9080', 'WireMock')])
+    resource_deps=['wiremock-mappings-configmap', 'wiremock-files-configmap'])
 
 k8s_resource('seq',
     labels=['infrastructure'],
@@ -219,8 +217,6 @@ print('║  Wegwijs / Organisation Registry - Development Environment    ║')
 print('╠═══════════════════════════════════════════════════════════════╣')
 print('║  keycloak.localhost:9080  → Keycloak (admin/admin)            ║')
 print('║  seq.localhost:9080       → Seq (structured logs / OTLP)     ║')
-print('║  opensearch.localhost:9080 → OpenSearch                      ║')
-print('║  mock.localhost:9080      → WireMock (MAGDA mock)            ║')
 print('║  api.localhost:9080       → Organisation Registry API         ║')
 print('║  ui.localhost:9080        → Angular UI (backoffice)           ║')
 print('║  m2m.localhost:9080       → M2M demo (client credentials)      ║')

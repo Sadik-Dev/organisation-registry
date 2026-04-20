@@ -42,21 +42,21 @@ public static class WiremockSetup
 
         await UpsertIntrospectionMapping(
             httpClient,
-            "edit-api-introspection-cjm",
+            "d0ed44c3-d089-45b3-a8d9-6985f95c81bf",
             "token-cjmClient-dv_organisatieregister_cjmbeheerder",
             "cjmClient",
             "dv_organisatieregister_cjmbeheerder");
 
         await UpsertIntrospectionMapping(
             httpClient,
-            "edit-api-introspection-orafin",
+            "dfaea320-94dc-4444-bb6f-f2e50c2ba4e1",
             "token-orafinClient-dv_organisatieregister_orafinbeheerder",
             "orafinClient",
             "dv_organisatieregister_orafinbeheerder");
 
         await UpsertIntrospectionMapping(
             httpClient,
-            "edit-api-introspection-test",
+            "b1ed4f1c-baf4-48a1-b8e1-69557a443637",
             "token-testClient-dv_organisatieregister_testclient",
             "testClient",
             "dv_organisatieregister_testclient");
@@ -98,10 +98,13 @@ public static class WiremockSetup
 
     private static async Task UpsertIntrospectionMapping(HttpClient httpClient, string id, string token, string clientId, string scope)
     {
+        await DeleteMappingIfExists(httpClient, id);
+
         var response = await httpClient.PostAsJsonAsync(
             "__admin/mappings",
             new
             {
+                id,
                 priority = 1,
                 request = new
                 {
@@ -132,12 +135,15 @@ public static class WiremockSetup
 
     private static async Task UpsertInactiveIntrospectionMapping(HttpClient httpClient)
     {
-        const string id = "edit-api-introspection-default";
+        const string id = "f0291dbe-fe74-4be6-af4e-362ad77a5f00";
+
+        await DeleteMappingIfExists(httpClient, id);
 
         var response = await httpClient.PostAsJsonAsync(
             "__admin/mappings",
             new
             {
+                id,
                 priority = 10,
                 request = new
                 {
@@ -157,6 +163,14 @@ public static class WiremockSetup
 
         if (!response.IsSuccessStatusCode)
             throw new Exception($"Application setup failed: could not configure wiremock mapping '{id}'");
+    }
+
+    private static async Task DeleteMappingIfExists(HttpClient httpClient, string id)
+    {
+        var response = await httpClient.DeleteAsync($"__admin/mappings/{id}");
+
+        if (!response.IsSuccessStatusCode && response.StatusCode != System.Net.HttpStatusCode.NotFound)
+            throw new Exception($"Application setup failed: could not delete existing wiremock mapping '{id}'");
     }
 
     private static Dictionary<string, string> JsonHeaders()

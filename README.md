@@ -61,8 +61,6 @@ tilt up
 Beschikbare URLs:
 - `http://keycloak.localhost:9080`
 - `http://seq.localhost:9080`
-- `http://opensearch.localhost:9080`
-- `http://mock.localhost:9080`
 - `http://api.localhost:9080/v1`
 - `http://ui.localhost:9080`
 - `http://m2m.localhost:9080`

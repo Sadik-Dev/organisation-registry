@@ -38,8 +38,6 @@ tilt up
 
 - `http://keycloak.localhost:9080`
 - `http://seq.localhost:9080`
-- `http://opensearch.localhost:9080`
-- `http://mock.localhost:9080`
 - `http://api.localhost:9080/v1`
 - `http://ui.localhost:9080`
 - `http://m2m.localhost:9080`
@@ -49,5 +47,5 @@ tilt up
 
 - [`Tiltfile`](../Tiltfile)
 - [`k3d.config.yaml`](../k3d.config.yaml)
-- [`demo/k8s`](k8s/config.yaml)
+- [`demo/k8s/config.yaml`](k8s/config.yaml)
 - [`scripts/dev-setup.sh`](../scripts/dev-setup.sh)
