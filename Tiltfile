@@ -69,7 +69,7 @@ k8s_yaml('demo/k8s/seq.yaml')
 k8s_yaml('demo/k8s/otel-collector.yaml')
 
 k8s_resource('mssql',
-    port_forwards='11433:1433',
+    port_forwards='21433:1433',
     labels=['infrastructure'],
     resource_deps=['namespace'])
 
@@ -78,6 +78,7 @@ k8s_resource('opensearch',
     resource_deps=['namespace'])
 
 k8s_resource('wiremock',
+    port_forwards='8080:8080',
     labels=['infrastructure'],
     resource_deps=['wiremock-mappings-configmap', 'wiremock-files-configmap'])
 
